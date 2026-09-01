@@ -29,7 +29,7 @@
                   Shi (Billy) Chen
                 </p>
                 <p>
-                I'm a final-year undergraduate at <a href="https://www.fudan.edu.cn/en/">Fudan University</a> studying Computer Science and Technology, and an exchange student at <a href="https://www.berkeley.edu/">UC Berkeley</a>.
+                I'm a master's student at Carnegie Mellon University's <a href="https://www.ri.cmu.edu/">Robotics Institute</a>, in the <a href="https://mrsdprojects.ri.cmu.edu/">MRSD</a> program (class of 2028). I received my B.Eng. in Computer Science and Technology from <a href="https://www.fudan.edu.cn/en/">Fudan University</a> in 2026, with an exchange year at <a href="https://www.berkeley.edu/">UC Berkeley</a>.
                 I'm the Co-founder & CTO of <a href="https://intuition.dev/">Intuition Core Inc.</a>, an AI & Robotics startup developing infrastructure solutions to accelerate real-world robot deployment.
                 </p>
                 <p>
@@ -57,6 +57,9 @@
               <td style="padding:16px;width:100%;vertical-align:middle">
                 <h2>News</h2>
                 <ul>
+                  <li><strong>[Aug 2026]</strong> Released <strong>GSSC</strong> — our work on generative semantic scene completion is now a <a href="https://arxiv.org/abs/2608.26737">preprint on arXiv</a>, with <a href="https://github.com/BillyChern/GSSC-S2D2">code</a>, checkpoints and the PS³ synthetic dataset all publicly released.</li>
+                  <li><strong>[Aug 2026]</strong> Joined the <a href="https://www.ri.cmu.edu/">Robotics Institute</a> at Carnegie Mellon University as an <a href="https://mrsdprojects.ri.cmu.edu/">MRSD</a> student, class of 2028.</li>
+                  <li><strong>[July 2026]</strong> Attended the <a href="https://www.lindau-nobel.org/">75th Lindau Nobel Laureate Meeting</a> in Lindau, Germany (28 June – 3 July 2026): a week of inspiring conversations with Nobel Laureates, and wonderful friends made among the ~600 young scientists from around the world.</li>
                   <li><strong>[Feb 2026]</strong> Honored to be selected as one of only 10 undergraduates from China to attend the 75th Lindau Nobel Laureate Meeting in Germany (June 28 – July 3, 2026), joining ~600 young scientists worldwide to engage with 50+ Nobel Laureates.</li>
                   <li><strong>[May 2025]</strong> Co-founded Intuition Core Inc. and secured $950K in pre-seed funding from Founders Fund and Fen Venture at $24M post-money valuation!</li>
                   <li><strong>[Jan 2025]</strong> Started exchange program at UC Berkeley, taking courses on Programming Languages and Compilers, Robotic Manipulation and Interaction, and Advanced Large Language Model Agents.</li>
@@ -144,18 +147,28 @@
                 </script>
               </td>
               <td style="padding:8px;width:80%;vertical-align:middle">
-                <span class="papertitle">Semantic Segmentation and Completion for LiDAR Signals</span>
+                <span class="papertitle">Generative Semantic Scene Completion</span>
                 <br>
                 <strong>Shi Chen</strong>, Weifeng Ge
                 <br>
                 Advisor: <a href="https://www.weifengge.net/">Prof. Weifeng Ge</a>, Fudan University
                 <br>
-                <em>In preparation for IEEE TPAMI</em>, Sept. 2024 - Present
+                <em>Preprint, under review</em>, Sept. 2024 - 2026
                 <br>
-                <a href="#">project page (coming soon)</a>
+                <a href="https://arxiv.org/abs/2608.26737">arXiv</a> /
+                <a href="https://shichen.world/GSSC-project-page/">project page</a> /
+                <a href="https://github.com/BillyChern/GSSC-S2D2">code</a> /
+                <a href="https://huggingface.co/Stone-Chern/GSSC-S2D2-checkpoints">checkpoints</a> /
+                <a href="https://huggingface.co/datasets/Stone-Chern/PS3-SemanticKITTI">PS³ dataset</a>
                 <p></p>
                 <p>
-                Proposed a 3D latent diffusion model with multi-stage data augmentation for sparse LiDAR datasets. Designed a multinomial discrete diffusion model achieving 39 mIoU, surpassing previous SOTA (37.9 mIoU). Funded by the <a href="https://www.academicenter.com/news/details/1838873467108659200.html">National Science Foundation of China Youth Fund</a>. Currently deploying on Unitree G1 humanoid and Go1 robot dog for outdoor navigation.
+                Recasts outdoor LiDAR semantic scene completion as a generative problem, using discrete diffusion in three
+                roles: synthesising paired sparse&ndash;dense training scenes (PS³), completing a scene from noise, and refining
+                a frozen base model in a single correction step (S²D²). Reaches <strong>38.8% mIoU on the SemanticKITTI hidden
+                test</strong> at one step with no test-time augmentation &mdash; to our knowledge the best causal, single-sweep,
+                single-sample result on that leaderboard, +2.1 pp over the previous best published score under that restriction.
+                Code, checkpoints and the PS³ synthetic corpus are publicly released. Funded by the
+                <a href="https://www.academicenter.com/news/details/1838873467108659200.html">National Science Foundation of China Youth Fund</a>.
                 </p>
               </td>
             </tr>
@@ -294,6 +307,23 @@
 
             <tr>
               <td style="padding:16px;width:20%;vertical-align:middle">
+                <a href="https://www.ri.cmu.edu/">
+                  <img src='images/CMU_seal.svg' width=100%>
+                </a>
+              </td>
+              <td style="padding:8px;width:80%;vertical-align:middle">
+                <a href="https://www.cmu.edu/">
+                  <span class="papertitle">Carnegie Mellon University</span>
+                </a>
+                <br>
+                <strong>M.S. Robotic Systems Development (MRSD)</strong>, Aug. 2026 - 2028 (expected)
+                <br>
+                <a href="https://www.ri.cmu.edu/">Robotics Institute</a>, School of Computer Science
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:16px;width:20%;vertical-align:middle">
                 <a href="https://www.berkeley.edu/">
                   <img src='images/Seal_of_University_of_California,_Berkeley.svg' width=100%>
                 </a>
@@ -322,7 +352,7 @@
                   <span class="papertitle">Fudan University</span>
                 </a>
                 <br>
-                <strong>B.Eng. Computer Science and Technology</strong>, Sept. 2022 - July 2026 (expected)
+                <strong>B.Eng. Computer Science and Technology</strong>, Sept. 2022 - July 2026
                 <br>
                 <em>GPA: 93/100 (Major GPA: 3.80/4.0); Ranking: 11/91</em>
                 <br>
