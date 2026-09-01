@@ -222,7 +222,7 @@ shi_chen_homepage/
 ├── stylesheet.css          # Jon Barron's template styling
 ├── README.md              # This file
 ├── data/
-│   └── ShiChen-CV.pdf     # Resume
+│   └── Shi_Chen_Resume.pdf  # Resume (built from Resume/latex/resume.tex)
 └── images/
     ├── ShiChen.jpg        # Profile photo
     ├── Fudan_University_Logo.svg
