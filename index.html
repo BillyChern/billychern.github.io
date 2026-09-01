@@ -33,7 +33,7 @@
                 I'm the Co-founder & CTO of <a href="https://intuition.dev/">Intuition Core Inc.</a>, an AI & Robotics startup developing infrastructure solutions to accelerate real-world robot deployment.
                 </p>
                 <p>
-                My research interests span <strong>computer vision</strong>, <strong>3D generation</strong>, <strong>robotics</strong>, and <strong>embodied AI</strong>. I've been fortunate to work with amazing researchers at UC Berkeley, University of Chicago, University of Cambridge, and Johns Hopkins University.
+                My research interests span <strong>robot learning</strong>, <strong>mobile manipulation</strong>, <strong>3D computer vision</strong>, and <strong>generative modeling</strong>. I've been fortunate to work with amazing researchers at UC Berkeley, University of Chicago, University of Cambridge, and Johns Hopkins University.
                 I'm honored to be funded by the <a href="https://www.academicenter.com/news/details/1838873467108659200.html">National Science Foundation of China under its Youth Fund</a> (one of the highest honors for undergraduates in China; ~120 students nationwide annually).
                 </p>
                 <p>
@@ -57,11 +57,11 @@
               <td style="padding:16px;width:100%;vertical-align:middle">
                 <h2>News</h2>
                 <ul>
-                  <li><strong>[Aug 2026]</strong> Released <strong>GSSC</strong> — our work on generative semantic scene completion is now a <a href="https://arxiv.org/abs/2608.26737">preprint on arXiv</a>, with <a href="https://github.com/BillyChern/GSSC-S2D2">code</a>, checkpoints and the PS³ synthetic dataset all publicly released.</li>
+                  <li><strong>[Aug 2026]</strong> Released <strong>GSSC</strong> — our work on generative semantic scene completion is now a <a href="https://arxiv.org/abs/2608.26737">preprint on arXiv</a>, with <a href="https://github.com/BillyChern/GSSC-S2D2">code</a>, <a href="https://huggingface.co/Stone-Chern/GSSC-S2D2-checkpoints">checkpoints</a> and the <a href="https://huggingface.co/datasets/Stone-Chern/PS3-SemanticKITTI">PS³ synthetic dataset</a> all publicly released.</li>
                   <li><strong>[Aug 2026]</strong> Joined the <a href="https://www.ri.cmu.edu/">Robotics Institute</a> at Carnegie Mellon University as an <a href="https://mrsd.ri.cmu.edu/">MRSD</a> student, class of 2028.</li>
                   <li><strong>[July 2026]</strong> Attended the <a href="https://www.lindau-nobel.org/">75th Lindau Nobel Laureate Meeting</a> in Lindau, Germany (28 June – 3 July 2026): a week of inspiring conversations with Nobel Laureates, and wonderful friends made among the ~600 young scientists from around the world.</li>
                   <li><strong>[Feb 2026]</strong> Honored to be selected as one of only 10 undergraduates from China to attend the 75th Lindau Nobel Laureate Meeting in Germany (June 28 – July 3, 2026), joining ~600 young scientists worldwide to engage with 50+ Nobel Laureates.</li>
-                  <li><strong>[May 2025]</strong> Co-founded Intuition Core Inc. and secured $950K in pre-seed funding from Founders Fund and Fen Venture at $24M post-money valuation!</li>
+                  <li><strong>[May 2025]</strong> Co-founded Intuition Core Inc. and secured pre-seed funding from Founders Fund.</li>
                   <li><strong>[Jan 2025]</strong> Started exchange program at UC Berkeley, taking courses on Programming Languages and Compilers, Robotic Manipulation and Interaction, and Advanced Large Language Model Agents.</li>
                   <li><strong>[Sept 2024]</strong> Awarded funding by the National Science Foundation of China under its Youth Fund.</li>
                   <li><strong>[Aug 2024]</strong> Completed summer research at University of Cambridge, graduating with First with Distinction.</li>
@@ -93,10 +93,10 @@
                 <br>
                 <strong>Co-founder & CTO</strong>, May 2025 - Present
                 <br>
-                <em>Berkeley & San Francisco, CA</em>
+                <em>Berkeley &amp; San Francisco, CA &amp; Shenzhen, CN</em>
                 <p></p>
                 <p>
-                Co-founded an AI & Robotics startup developing infrastructure solutions to accelerate real-world robot deployment. Designed a novel Masked Autoencoders (MAE) based world model pretraining architecture achieving 15%+ downstream policy training efficiency. Built ultra-low latency (&lt;100ms) teleoperation systems over long distances (Hawaii-SF, Shanghai-SF). Secured $950K in pre-seed funding from Founders Fund and Fen Venture at $24M post-money valuation cap.
+                Co-founded an AI & Robotics startup developing infrastructure solutions to accelerate real-world robot deployment. Designed a novel Masked Autoencoders (MAE) based world model pretraining architecture achieving 15%+ downstream policy training efficiency. Built ultra-low latency (&lt;100ms) teleoperation systems over long distances (Hawaii-SF, Shanghai-SF). Secured pre-seed funding from Founders Fund.
                 </p>
                 <p style="margin-top:8px;margin-bottom:4px;font-size:small;font-style:italic;">
                 Demo video of our Vision-Language-Action (VLA) model trained with our customized data collection pipeline and optimized with our world model pre-training method:
@@ -116,7 +116,7 @@
               <td style="padding:16px;width:100%;vertical-align:middle">
                 <h2>Research</h2>
                 <p>
-                  I'm interested in computer vision, 3D generation, robotics, and embodied AI. My research focuses on developing methods that enable machines to perceive, understand, and interact with the physical world. Representative works are <span class="highlight">highlighted</span>.
+                  I'm interested in robot learning, mobile manipulation, 3D computer vision, and generative modeling. My research focuses on developing methods that enable machines to perceive, understand, and interact with the physical world. Representative works are <span class="highlight">highlighted</span>.
                 </p>
               </td>
             </tr>
@@ -166,7 +166,8 @@
                 roles: synthesising paired sparse&ndash;dense training scenes (PS³), completing a scene from noise, and refining
                 a frozen base model in a single correction step (S²D²). Reaches <strong>38.8% mIoU on the SemanticKITTI hidden
                 test</strong> at one step with no test-time augmentation &mdash; to our knowledge the best causal, single-sweep,
-                single-sample result on that leaderboard, +2.1 pp over the previous best published score under that restriction.
+                single-sample result on that leaderboard, +2.1 pp over the previous best published score under that restriction; four correction steps with an eight-view <em>D</em><sub>4</sub> ensemble reach 39.2%,
+                our entry on the public leaderboard.
                 Code, checkpoints and the PS³ synthetic corpus are publicly released. Funded by the
                 <a href="https://www.academicenter.com/news/details/1838873467108659200.html">National Science Foundation of China Youth Fund</a>.
                 </p>
@@ -308,7 +309,7 @@
             <tr>
               <td style="padding:16px;width:20%;vertical-align:middle">
                 <a href="https://www.ri.cmu.edu/">
-                  <img src='images/CMU_seal.svg' width=100%>
+                  <img src='images/CMU_RI_icon.png' width=100%>
                 </a>
               </td>
               <td style="padding:8px;width:80%;vertical-align:middle">
