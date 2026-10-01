@@ -264,10 +264,19 @@ span.highlight {
   box-shadow: 0 1px 2px rgba(15, 23, 42, .08), 0 6px 18px rgba(15, 23, 42, .12);
 }
 .clip-open video {
+  /* Pinned to the card's edges: Safari/WebKit does not resolve height:100% inside a
+     <button> sized by aspect-ratio, which made each preview 720px tall and cropped. */
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
+}
+@supports not (aspect-ratio: 16 / 9) {
+  .clip-open { height: 0; padding-top: 56.25%; }
+  .feature-frame { height: 0; padding-top: 56.25%; }
 }
 .clip-expand {
   position: absolute;
