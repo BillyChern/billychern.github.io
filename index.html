@@ -49,8 +49,8 @@
       <tr style="padding:0px">
         <td style="padding:0px">
           <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr style="padding:0px">
-              <td style="padding:2.5%;width:63%;vertical-align:middle">
+            <tr class="hero-row" style="padding:0px">
+              <td class="hero-text" style="padding:2.5%;width:63%;vertical-align:middle">
                 <p class="name" style="text-align: center;">
                   Shi (Billy) Chen
                 </p>
@@ -74,7 +74,7 @@
                   <a href="https://www.linkedin.com/in/shibillychen/">LinkedIn</a>
                 </p>
               </td>
-              <td style="padding:2.5%;width:37%;max-width:37%">
+              <td class="hero-photo" style="padding:2.5%;width:37%;max-width:37%">
                 <a href="images/ShiChen.jpg"><img style="width:100%;max-width:100%;object-fit: cover; border-radius: 50%;" alt="profile photo" src="images/ShiChen.jpg" class="hoverZoomLink"></a>
               </td>
             </tr>
@@ -111,7 +111,7 @@
           <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
             <tr>
-              <td style="padding:16px;width:30%;vertical-align:middle;text-align:center">
+              <td class="logo-cell" style="padding:16px;width:30%;vertical-align:middle;text-align:center">
                 <a href="https://intuition.dev/">
                   <img src='images/intuition_logo_round.png' width=100% style="max-width:240px;">
                 </a>
@@ -131,7 +131,7 @@
                 <p style="margin-top:8px;margin-bottom:4px;font-size:small;font-style:italic;">
                 Demo video of our Vision-Language-Action (VLA) model trained with our customized data collection pipeline and optimized with our world model pre-training method:
                 </p>
-                <video width="100%" autoplay loop muted playsinline controls style="border-radius:4px;">
+                <video width="100%" autoplay loop muted playsinline controls preload="metadata" poster="images/demo_vla_poster.jpg" style="border-radius:4px;">
                   <source src="images/demo_vla.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -195,11 +195,13 @@
                       <p class="clip-place">Kauai, Hawaii</p>
                     </li>
                   </ul>
-                  <dialog class="clip-dialog" id="clip-dialog" aria-label="Video">
-                    <button class="dialog-close" type="button" aria-label="Close">&times;</button>
-                    <video controls playsinline preload="metadata"></video>
-                    <p class="dialog-caption"></p>
-                  </dialog>
+                  <div class="lightbox" id="clip-dialog" role="dialog" aria-modal="true" aria-label="Video" hidden>
+                    <div class="lightbox-panel">
+                      <button class="dialog-close" type="button" aria-label="Close">&times;</button>
+                      <video controls playsinline preload="metadata"></video>
+                      <p class="dialog-caption"></p>
+                    </div>
+                  </div>
                 </section>
                 <script type="text/javascript">
                   (function () {
@@ -223,6 +225,7 @@
                       var io = new IntersectionObserver(function (entries) {
                         entries.forEach(function (e) {
                           var v = e.target;
+                          if (document.documentElement.classList.contains('lightbox-open')) return;  // never restart behind the overlay
                           if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
                           else { v.pause(); }
                         });
@@ -249,24 +252,58 @@
                       if (!reduce) teaser.play();
                     });
 
-                    // Clip cards open large in a dialog, with sound available.
-                    section.querySelectorAll('.clip-open').forEach(function (btn) {
-                      btn.addEventListener('click', function () {
-                        dialogVideo.src = btn.getAttribute('data-src');
-                        dialogVideo.muted = false;
-                        dialogCaption.textContent = btn.getAttribute('data-caption');
-                        if (typeof dialog.showModal === 'function') dialog.showModal(); else dialog.setAttribute('open', '');
-                        var p = dialogVideo.play(); if (p && p.catch) p.catch(function () {});
+                    // Clip cards open large in a full-screen overlay. It is moved to <body> and
+                    // uses position:fixed, so it sits above every element in every browser,
+                    // including in-app browsers without <dialog> support. Other videos on the
+                    // page are paused and hidden while it is open, because some phone browsers
+                    // paint playing videos above any overlay.
+                    document.body.appendChild(dialog);
+                    var opener = null, resumeList = [];
+                    function openLightbox(btn) {
+                      opener = btn; resumeList = [];
+                      Array.prototype.forEach.call(document.querySelectorAll('video'), function (v) {
+                        if (v === dialogVideo) return;
+                        v.setAttribute('data-autoplay', v.autoplay ? '1' : '0');
+                        v.autoplay = false;  // WebKit would otherwise start autoplay videos behind the overlay
+                        if (!v.paused) { resumeList.push(v); v.pause(); }
+                        v.style.visibility = 'hidden';
                       });
-                    });
+                      dialogVideo.src = btn.getAttribute('data-src');
+                      dialogVideo.muted = false;
+                      dialogCaption.textContent = btn.getAttribute('data-caption');
+                      dialog.hidden = false;
+                      document.documentElement.classList.add('lightbox-open');
+                      dialog.querySelector('.dialog-close').focus();
+                      var p = dialogVideo.play(); if (p && p.catch) p.catch(function () {});
+                    }
                     function closeDialog() {
+                      if (dialog.hidden) return;
                       dialogVideo.pause();
                       dialogVideo.removeAttribute('src'); dialogVideo.load();
-                      if (dialog.open) dialog.close();
+                      dialog.hidden = true;
+                      document.documentElement.classList.remove('lightbox-open');
+                      Array.prototype.forEach.call(document.querySelectorAll('video'), function (v) {
+                        v.style.visibility = '';
+                        if (v.getAttribute('data-autoplay') === '1') v.autoplay = true;
+                        v.removeAttribute('data-autoplay');
+                      });
+                      if (!reduce) resumeList.forEach(function (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); });
+                      if (opener) opener.focus();
                     }
+                    Array.prototype.forEach.call(section.querySelectorAll('.clip-open'), function (btn) {
+                      btn.addEventListener('click', function () { openLightbox(btn); });
+                    });
                     dialog.querySelector('.dialog-close').addEventListener('click', closeDialog);
                     dialog.addEventListener('click', function (e) { if (e.target === dialog) closeDialog(); });
-                    dialog.addEventListener('close', function () { dialogVideo.pause(); dialogVideo.removeAttribute('src'); dialogVideo.load(); });
+                    document.addEventListener('keydown', function (e) {
+                      if (dialog.hidden) return;
+                      if (e.key === 'Escape' || e.key === 'Esc') { closeDialog(); return; }
+                      if (e.key === 'Tab') {  // keep focus inside the overlay
+                        var f = [dialog.querySelector('.dialog-close'), dialogVideo];
+                        var i = f.indexOf(document.activeElement);
+                        e.preventDefault(); f[(i + (e.shiftKey ? f.length - 1 : 1)) % f.length].focus();
+                      }
+                    });
                   })();
                 </script>
               </td>
@@ -472,7 +509,7 @@
           <table style="width:100%;border:0px;border-spacing:0px 10px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
             <tr>
-              <td style="padding:16px;width:20%;vertical-align:middle">
+              <td class="logo-cell" style="padding:16px;width:20%;vertical-align:middle">
                 <a href="https://www.ri.cmu.edu/">
                   <img src='images/CMU_RI_icon_white.png' width=100%>
                 </a>
@@ -489,7 +526,7 @@
             </tr>
 
             <tr>
-              <td style="padding:16px;width:20%;vertical-align:middle">
+              <td class="logo-cell" style="padding:16px;width:20%;vertical-align:middle">
                 <a href="https://www.berkeley.edu/">
                   <img src='images/Seal_of_University_of_California,_Berkeley.svg' width=100%>
                 </a>
@@ -508,7 +545,7 @@
             </tr>
 
             <tr>
-              <td style="padding:16px;width:20%;vertical-align:middle">
+              <td class="logo-cell" style="padding:16px;width:20%;vertical-align:middle">
                 <a href="https://www.fudan.edu.cn/en/">
                   <img src='images/Fudan_University_Logo.svg' width=100%>
                 </a>
